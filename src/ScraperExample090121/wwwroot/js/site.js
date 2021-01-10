@@ -44,12 +44,25 @@ function toggleCover() {
     }
 }
 
+function checkFieldsPopulated(terms, searchUrl) {
+    if (terms === '' || searchUrl === '') {
+        alert('All fields must be populated!');
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
 $(document).ready(function () {
     document.getElementById('seoQuerySubmit').addEventListener('click', function () {
-        toggleCover();
-        var searchEngine = document.getElementById('SearchEngine').value;
+
         var terms = document.getElementById('Terms').value.replace(/ /g, '+');
         var searchUrl = document.getElementById('Url').value;
+        var fieldsCheck = checkFieldsPopulated(terms, searchUrl);
+        if (fieldsCheck === false) return;
+        toggleCover();
+        var searchEngine = document.getElementById('SearchEngine').value;
         var httpRequest = new XMLHttpRequest();
         var url = '/api/parser?terms=' + terms + '&searchEngine=' + searchEngine;
         httpRequest.open('GET', url);
