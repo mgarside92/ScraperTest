@@ -1,0 +1,52 @@
+﻿@model ScraperExample090121.Models.SEOQuery
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="cover" id="cover-identifier">
+    <div class="loader">Loading...</div>
+</div>
+
+<h2>Create</h2>
+
+<h4>SEOQuery</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label for="SearchEngine">Choose a Search Engine:</label>
+            <select name="SearchEngine" id="SearchEngine">
+                <option value="google">Google</option>
+                <option value="bing">Bing</option>
+                <option value="yahoo">Yahoo!</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Terms" class="control-label"></label>
+            <input asp-for="Terms" class="form-control" />
+            <span asp-validation-for="Terms" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Url" class="control-label"></label>
+            <input asp-for="Url" class="form-control" />
+            <span asp-validation-for="Url" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" id="seoQuerySubmit" value="Search" class="btn btn-default" />
+        </div>
+    </div>
+    <div class="col-md-4 results-wrapper" id="results-wrapper">
+        <label>Your URL came in the following positions in your chosen search engine</label>
+        <div id="results" class="results-pane"></div>
+    </div>
+</div>
+
+<!--
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+-->
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
